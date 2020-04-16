@@ -1,0 +1,58 @@
+.main{
+    background-image: url(../../img/banner/bradcam.png);
+    background-size: auto;
+    background-repeat: no-repeat;
+    padding: 10px;
+}
+.btn-authen
+{
+    background: #00D363;
+    color: #fff;
+    display: inline-block;
+    padding: 13px 29px 13px 29px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border: 0;
+    border: 1px solid transparent;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff !important;
+    text-transform: capitalize;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+.posting-content {
+    padding: 10px;
+    border-style: solid;
+    margin-top: 10px;
+}
+
+.posting-form {
+    padding: 5px;
+    margin: 10px;
+}
+
+.posting-title {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+textarea{
+    overflow-y:scroll;
+}
+
+form label {
+    font-weight:bold
+}
+
+.h2 {
+    font-weight:bold
+}
