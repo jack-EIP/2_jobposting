@@ -12,14 +12,15 @@ router.get("/signUpEmployeePage",(req, res) => {
 });
 
 router.post("/signUpEmployeePage/signUp_employee",(req, res) => {
-      // console.log("dasdsadasdasdas");
-      // var email = req.body.email,
-      //     password = req.body.pass;
-      //     username = req.body.name;
-      // db.User.create({username: username, email: email, password: password, role: 1}).then(function (user) {
+  console.log("dasdsadasdasdas");
+  var email = req.body.email,
+      password = req.body.pass;
+      username = req.body.name;
+    db.User.create({username: username, email: email, password: password, role: 1}).then(function (user) {
             
-      // });
+      
       res.redirect("/loginPage");
+      });
   });
 
 

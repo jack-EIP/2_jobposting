@@ -15,7 +15,7 @@ router.post("/signUp_employee",(req, res) => {
         var email = req.body.email,
             password = req.body.pass;
             username = req.body.name;
-        user.create({username: username, email: email, password: password}).then(function (user) {
+        db.User.create({username: username, email: email, password: password, role: 1}).then(function (user) {
               res.json(user);  
         });
     });
