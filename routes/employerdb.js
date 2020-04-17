@@ -10,31 +10,34 @@ router.get('/', function(req, res, next) {
    });
 });
 
-// router.get('/postingJob', function(req, res, next) {
-//     res.render('postingJob', { title: 'abc' });
-//   });
-
 router.get('/postingJob', function(req, res, next) {
-  db.Job.findAll().then(function (job) {  
-    console.log(job); 
-    res.json({
-      re: job
-    });
-   });
-});
+    res.render('postingJob', { title: 'abc' });
+  });
 
-router.post('/postingJob/review', function(req, res, next) {
+// router.get('/postingJob', function(req, res, next) {
+//   db.Job.findAll().then(function (job) {  
+//     console.log(job); 
+//     res.json({
+//       re: job
+//     });
+//    });
+// });
+
+router.post('/postingJob', function(req, res, next) {
+  db.Job.create({Chucdanh: req.body.Chucdanh,
+                        Capbac: req.body.Capbac,
+                        Nganhnghe: req.body.Nganhnghe,
+                        Mota: req.body.Mota,
+                        Yeucaucongviec: req.body.Yeucaucongviec,
+                        Luongmin: req.body.Luongmin,
+                        Luongmax: req.body.Luongmax,
+                        Noilamviec: req.body.Noilamviec})
+    .then(function (Job) {
     res.json({
-        Chucdanh: req.body.Chucdanh,
-        Capbac: req.body.Capbac,
-        Nganhnghe: req.body.Nganhnghe,
-        Mota: req.body.Mota,
-        Yeucaucongviec: req.body.Yeucaucongviec,
-        Luongmin: req.body.Luongmin,
-        Luongmax: req.body.Luongmax,
-        Noilamviec: req.body.Noilamviec
+      re: Job
     });
   });
+});
   
 
 module.exports = router;

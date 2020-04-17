@@ -4,9 +4,17 @@ var db = require("../model/m_db.js");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  db.Job.findAll().then(function (job) {  
-    //console.log(job); 
-    res.render('index', { test: 0, job: job });
+  var currentUser = 1;
+  db.curentUser.findAll().then(function (currentUserinDB) {
+    console.log("currentUserinDB", currentUserinDB.length); 
+    if (currentUserinDB.length === 0) {  
+      currentUser = 0 ;
+    }
+  });
+  
+  db.Job.findAll().then(function (job) {
+    console.log("currentUser", currentUser); 
+    res.render('index', {currentUser: currentUser, test: 0, job: job, link_logo: "../img/logo.png" });
    });
   });
 
@@ -16,7 +24,7 @@ router.get('/signout', function(req, res, next) {
     truncate: true
   }).then(function (user) {  
     console.log(user); 
-    res.render('signout_page',  { link_logo: "../img/logo.png" });
+    res.render('signout_page', { link_logo: "../img/logo.png" });
    });
     
   });
