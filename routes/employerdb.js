@@ -33,11 +33,9 @@ router.post('/postingJob', function(req, res, next) {
                         Luongmax: req.body.Luongmax,
                         Noilamviec: req.body.Noilamviec})
     .then(function (Job) {
-    res.json({
-      re: Job
+      res.redirect("/employerdbPage");
     });
   });
-});
   
 
 module.exports = router;
