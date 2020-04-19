@@ -14,9 +14,9 @@ router.get('/', function(req, res, next) {
   
   db.Job.findAll().then(function (job) {
     console.log("currentUser", currentUser); 
-    res.render('index', {currentUser: currentUser, test: 0, job: job, link_logo: "../img/logo.png" });
+    res.render('v_index', {currentUser: currentUser, test: 0, job: job, link_logo: "../img/logo.png" });
    });
-  });
+});
 
 router.get('/signout', function(req, res, next) {
   db.curentUser.destroy({
@@ -24,22 +24,21 @@ router.get('/signout', function(req, res, next) {
     truncate: true
   }).then(function (user) {  
     console.log(user); 
-    res.render('signout_page', { link_logo: "../img/logo.png" });
+    res.render('v_signout', { link_logo: "../img/logo.png" });
    });
-    
-  });
+});
 
-  router.get('/job_details/:id', function(req, res, next) {
-    console.log(req.params);
-    db.Job.findOne({
-      where: {
-        id: req.params.id
-      }
-    }).then(function (Job_detail) {  
-      console.log(Job_detail); 
-      res.render('detailJob',  { Job_detail: Job_detail, link_logo: "../img/logo.png" });
-    });
+router.get('/job_details/:id', function(req, res, next) {
+  console.log(req.params);
+  db.Job.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(function (Job_detail) {  
+    console.log(Job_detail); 
+    res.render('v_job_details',  { Job_detail: Job_detail, link_logo: "../img/logo.png" });
   });
+});
   
 
 module.exports = router;
