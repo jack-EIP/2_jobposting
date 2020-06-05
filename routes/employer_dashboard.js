@@ -14,22 +14,18 @@ router.get('/', function(req, res, next) {
       currentUser = 0 ;
     } else {
       currentUserId =  currentUserinDB[0].idUser;
-      db.Company.findAll({where: {userId: currentUserinDB[0].idUser}}).then(function (company) {
-        db.Job.findAll({where: {companyId: company[0].id}}).then(function (job) {
-          for (var i=0; i < job.length; i++)
-          {
-            db.Applicant.findAll({where: {jobId: job[i].id}}).then (function(applicant){
-              console.log("CCCCCCCCCCC",applicant);
-            });
-          }
+      db.Company.findOne({where: {userId: currentUserinDB[0].idUser}}).then(function (company) {
+        db.Job.findAll({where: {companyId: company.id}}).then (function(job) {
+          job.forEach(element => {
+            db.Applicant.findAll({where:{ }})
+          });
+          res.json({
+            res: job
+          });
         });
-        db.Job.findAll({where: {companyId: company[0].id}}).then(function (job) {
-          res.render('v_employer_dashboard', { job: job, link_logo: "/page_index/img/logo.png" });
-        });
-       });
+      });
     }
   });
-l
 });
 
 router.get('/jobposting', function(req, res, next) {
