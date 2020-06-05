@@ -13,21 +13,20 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/magnific-popup.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/themify-icons.css">
-    <link rel="stylesheet" href="../css/nice-select.css">
-    <link rel="stylesheet" href="../css/flaticon.css">
-    <link rel="stylesheet" href="../css/gijgo.css">
-    <link rel="stylesheet" href="../css/animate.min.css">
-    <link rel="stylesheet" href="../css/slicknav.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/magnific-popup.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/themify-icons.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/nice-select.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/flaticon.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/gijgo.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/animate.min.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/slicknav.css">
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../page_jobdetails/css/style.css">
 
-    <link href="../employerdb/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="../employerdb/css/style.css" rel="stylesheet">
+    <link href="../page_jobdetails/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
@@ -62,7 +61,7 @@
                         <div class="single_jobs white-bg d-flex justify-content-between">
                             <div class="jobs_left d-flex align-items-center">
                                 <div class="thumb">
-                                    <img src="../img/svg_icon/1.svg" alt="">
+                                    <img src="../page_jobdetails/img/svg_icon/1.svg" alt="">
                                 </div>
                                 <div class="jobs_conetent">
                                     <a href="#"><h4><%= Job_detail.Chucdanh%></h4></a>
@@ -100,20 +99,21 @@
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false ">
         <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Bạn có chắc chắn ?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Không</button>
+                    <form method="post" action="/joblist">
+                        <button class="btn btn-secondary" type="submit" value="Submit"/>Có</button>
+                    </form>
+                </div>
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a method="post" class="btn btn-primary" href="/signout">Logout</a>
-            </div>
-        </div>
-
         </div>
     </div>
 
@@ -126,7 +126,7 @@
                         <div class="footer_widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="../img/logo.png" alt="">
+                                    <img src="../page_jobdetails/img/logo.png" alt="">
                                 </a>
                             </div>
                             <p>
@@ -223,43 +223,40 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- link that opens popup -->
     <!-- JS here -->
-    <script src="../js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/owl.carousel.min.js"></script>
-    <script src="../js/isotope.pkgd.min.js"></script>
-    <script src="../js/ajax-form.js"></script>
-    <script src="../js/waypoints.min.js"></script>
-    <script src="../js/jquery.counterup.min.js"></script>
-    <script src="../js/imagesloaded.pkgd.min.js"></script>
-    <script src="../js/scrollIt.js"></script>
-    <script src="../js/jquery.scrollUp.min.js"></script>
-    <script src="../js/wow.min.js"></script>
-    <script src="../js/nice-select.min.js"></script>
-    <script src="../js/jquery.slicknav.min.js"></script>
-    <script src="../js/jquery.magnific-popup.min.js"></script>
-    <script src="../js/plugins.js"></script>
-    <script src="../js/gijgo.min.js"></script>
+    <script src="../page_jobdetails/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="../page_jobdetails/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../page_jobdetails/js/popper.min.js"></script>
+    <script src="../page_jobdetails/js/bootstrap.min.js"></script>
+    <script src="../page_jobdetails/js/owl.carousel.min.js"></script>
+    <script src="../page_jobdetails/js/isotope.pkgd.min.js"></script>
+    <script src="../page_jobdetails/js/ajax-form.js"></script>
+    <script src="../page_jobdetails/js/waypoints.min.js"></script>
+    <script src="../page_jobdetails/js/jquery.counterup.min.js"></script>
+    <script src="../page_jobdetails/js/imagesloaded.pkgd.min.js"></script>
+    <script src="../page_jobdetails/js/scrollIt.js"></script>
+    <script src="../page_jobdetails/js/jquery.scrollUp.min.js"></script>
+    <script src="../page_jobdetails/js/wow.min.js"></script>
+    <script src="../page_jobdetails/js/nice-select.min.js"></script>
+    <script src="../page_jobdetails/js/jquery.slicknav.min.js"></script>
+    <script src="../page_jobdetails/js/jquery.magnific-popup.min.js"></script>
+    <script src="../page_jobdetails/js/plugins.js"></script>
+    <script src="../page_jobdetails/js/gijgo.min.js"></script>
 
    
-    <script src="../employerdb/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../page_jobdetails/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../employerdb/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../page_jobdetails/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../employerdb/js/sb-admin-2.min.js"></script>
+    <script src="../page_jobdetails/js/sb-admin-2.min.js"></script>
 
     <!--contact js-->
-    <script src="../js/contact.js"></script>
-    <script src="../js/jquery.ajaxchimp.min.js"></script>
-    <script src="../js/jquery.form.js"></script>
-    <script src="../js/jquery.validate.min.js"></script>
-    <script src="../js/mail-script.js"></script>
-
-
-    <script src="../js/main.js"></script>
+    <script src="../page_jobdetails/js/contact.js"></script>
+    <script src="../page_jobdetails/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../page_jobdetails/js/jquery.form.js"></script>
+    <script src="../page_jobdetails/js/jquery.validate.min.js"></script>
+    <script src="../page_jobdetails/js/mail-script.js"></script>
 </body>
 
 </html>

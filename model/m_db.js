@@ -69,7 +69,7 @@ var Job = sequelize.define('jobs', {
     },
     Noilamviec: {
         type: Sequelize.TEXT
-    } 
+    }
 },{
     timestamps: false
 });
@@ -80,10 +80,19 @@ var curentUser = sequelize.define(`currentUser`,{
     }
 });
 
+var Applicant = sequelize.define(`applicant`,{
+    userId: {
+        type: Sequelize.INTEGER
+    },
+    jobId: {
+        type: Sequelize.INTEGER
+    }
+});
+
 Company.belongsTo(User);
 Company.hasMany(Job);
-Job.belongsToMany(User, {through: 'applicant', timestamps: false});
-User.belongsToMany(Job, {through: 'applicant', timestamps: false});
+//Job.belongsToMany(User, {through: 'applicant', timestamps: false});
+//User.belongsToMany(Job, {through: 'applicant', timestamps: false});
 // create all the defined tables in the specified database.
 
 sequelize.sync()
@@ -94,5 +103,6 @@ module.exports = {
     User,
     Company,
     Job,
-    curentUser
+    curentUser,
+    Applicant
 }

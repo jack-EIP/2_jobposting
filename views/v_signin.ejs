@@ -8,13 +8,46 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Main css -->
     <link rel="stylesheet" href="page_signin/css/style.css">
+    <link rel="stylesheet" href="page_signin/css/style_header.css">
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
 </head>
 <body>
-    <%- include('header'); -%>
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="/">
+                                        <img src="../page_index/img/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="/">home</a></li>
+                                            <li><a href="">Browse Job</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
     <div class="main">
 
         <!-- Sign up form -->

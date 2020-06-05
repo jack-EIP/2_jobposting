@@ -894,7 +894,7 @@ h3 {
   top: 0;
   z-index: 9;
   position: absolute;
-  background-image: url(../../img/banner/bradcam.png);
+  background-image: url(../img/banner/bradcam.png);
   background-size: auto;
   background-repeat: no-repeat;;
 }

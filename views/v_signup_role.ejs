@@ -17,9 +17,39 @@
     <!-- Place favicon.ico in the root directory -->
 
 <body>
-    <div>
-        <%- include('header'); -%>
-    q</div>
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="/">
+                                        <img src="../page_index/img/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="/">home</a></li>
+                                            <li><a href="">Browse Job</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div style="margin-top: 50px;" class="main">
 
@@ -31,19 +61,19 @@
                 </div>
                 <div class="container-fluid">
                     <div style="margin-top: 50px;" align="center" class="col-sm">
-                        <a href="/signup_role/employer" class="btn btn-danger btn-icon-split btn-lg">
-                            <span class="icon text-white-50">
-                              <i class="fas fa-user"></i>
-                            </span>
-                            <span class="text">Người tìm việc</span>
-                          </a>
-                    </div>
-                    <div style="margin-top: 80px; margin-bottom: 20px;" align="center" class="col-sm">
-                        <a href="#" class="btn btn-danger btn-icon-split btn-lg">
+                        <a href="/signup_role/signup" class="btn btn-danger btn-icon-split btn-lg">
                             <span class="icon text-white-50">
                               <i class="fas fa-briefcase"></i>
                             </span>
                             <span class="text">Nhà tuyển dụng</span>
+                          </a>
+                    </div>
+                    <div style="width: 100% ; margin-top: 80px; margin-bottom: 20px;" align="center" class="col-sm">
+                        <a href="#" class="btn btn-danger btn-icon-split btn-lg">
+                            <span class="icon text-white-50">
+                              <i class="fas fa-user"></i>
+                            </span>
+                            <span class="text">Người tìm việc</span>
                           </a>
                     </div>
                 </div>

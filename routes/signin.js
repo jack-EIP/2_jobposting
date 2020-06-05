@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 router.post("/",(req, res) => {
   if (!req.body.email || !req.body.pass)
   {
-    res.render('login', { msg: "invalid", link_logo: "/page_index/img/logo.png" });
+    res.render('v_signin', { msg: "invalid", link_logo: "/page_index/img/logo.png" });
   }
   else {
   var email = req.body.email,
@@ -19,9 +19,9 @@ router.post("/",(req, res) => {
   db.User.findOne({ where: { email: email } }).then(function (user) {   
       if (!user) {
         console.log("1")
-        res.render('login', { msg: "failed", link_logo: "/page_index/img/logo.png" });
+        res.render('v_signin', { msg: "failed", link_logo: "/page_index/img/logo.png" });
       } else if (req.body.pass != user.password) {
-        res.render('login', { msg: "failed", link_logo: "/page_index/img/logo.png" });
+        res.render('v_signin', { msg: "failed", link_logo: "/page_index/img/logo.png" });
         console.log("2")
       } else {
         db.curentUser.create({idUser: user.id}).then(function (user) {

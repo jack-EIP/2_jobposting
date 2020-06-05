@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Main css -->
     <link rel="stylesheet" href="../page_employer_signup/css/style.css">
+    <link rel="stylesheet" href="../page_employer_signup/css/style_header.css">
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
@@ -26,38 +27,103 @@
 
 </head>
 <body>
-    <%- include('header'); -%>
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="/">
+                                        <img src="../page_index/img/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="/">home</a></li>
+                                            <li><a href="">Browse Job</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div class="main">
 
         <!-- Sign up form -->
         <div class="signup">
             <div class="container">
-                <div class="signup-content">
-                    <div class="signup-form">
-                        <h2 class="form-title">Sign up</h2>
-                        <form action="/signup_role/employer/signup" method="POST" class="register-form" id="register-form">
-                            <div class="form-group">
-                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Email"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password"/>
-                            </div>
-                            <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
-                            </div>
-                        </form>
+                <div style="padding: 100px 0px 100px 0" class="">
+                    <div class="row">
+                        <div class="col signup-form">
+                            <h2 class="form-title">Thông tin của bạn</h2>
+                            <% if (msg === "invalid") { %>
+                                <div class="alert alert-danger" role="alert">
+                                    Email đã được sử dụng
+                                </div>
+                            <% } %>
+                            <form action="/signup_role/signup" method="POST" class="register-form" id="register-form">
+                                <div class="form-group">
+                                    <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                    <input type="text" name="name" id="name" placeholder="Tên của bạn"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                    <input type="email" name="email" id="email" placeholder="Email của bạn"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                    <input type="password" name="pass" id="pass" placeholder="Mật khẩu"/>
+                                </div>
+                        </div>
+                        <div class="col signup-image">
+                            <figure><img src="../page_employer_signup/images/signup-image.jpg" alt="sing up image"></figure>
+                        </div>
                     </div>
-                    <div class="signup-image">
-                        <figure><img src="../page_employer_signup/images/signup-image.jpg" alt="sing up image"></figure>
-                        <a href="../signin" class="signup-image-link">I am already member</a>
+                    <div style="margin-top: 100px;" class="row">
+                        <div class="col signup-image">
+                            <figure><img src="../page_employer_signup/images/signup-company.jpg" alt="sing up image"></figure>
+                            <a href="../signin" class="signup-image-link">I am already member</a>
+                        </div>
+                        <div class="col signup-form">
+                            <h2 class="form-title">Thông tin công ty</h2>
+                            <% if (msg === "invalid") { %>
+                                <div class="alert alert-danger" role="alert">
+                                    Email đã được sử dụng
+                                </div>
+                            <% } %>
+                                <div class="form-group">
+                                    <label for="name"><i class="zmdi zmdi-card material-icons-name"></i></label>
+                                    <input type="text" name="company_name" id="company_name" placeholder="Tên công ty"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email"><i class="zmdi zmdi-city"></i></label>
+                                    <input type="text" name="company_address" id="company_address" placeholder="Địa chỉ"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass"><i class="zmdi zmdi-info"></i></label>
+                                    <input type="text" name="company_info" id="company_info" placeholder="Thông tin"/>
+                                </div>
+                                <div class="form-group form-button">
+                                    <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
