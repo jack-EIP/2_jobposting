@@ -2,13 +2,23 @@ var express = require('express');
 var router = express.Router();
 var db = require("../model/m_db.js");
 
+
+var roleEmployer = 0;
+var roleEmployee = 0;
+
 /* GET role login. */
 router.get('/', function(req, res, next) {
   res.render('v_signup_role', { link_logo: "../page_signup_role/img/logo.png" });
 });
 
-router.get("/signup",(req, res) => {
-  res.render('v_employer_signup', {msg: "valid", link_logo: "../page_signup_role/img/logo.png" });
+router.get("/employersignup",(req, res) => {
+  roleEmployer = 1;
+  res.render('v_employer_signup', {msg: "valid", link_logo: "../page_signup_role/img/logo.png", role: 1 });
+});
+
+router.get("/employeesignup",(req, res) => {
+  roleEmployee = 1
+  res.render('v_employer_signup', {msg: "valid", link_logo: "../page_signup_role/img/logo.png", role: 2 });
 });
 
 router.post("/signup",(req, res) => {
@@ -24,13 +34,24 @@ router.post("/signup",(req, res) => {
     console.log(user)
     if (user.length === 0)
     {
+      if (roleEmployer == 1) {
       db.User.create({username: username, email: email, password: password, role: 1})
       .then(function (user) {
         db.Company.create({Ten: company_name, Diachi: company_address, Thongtin: company_info, userId: user.id})
         .then(function (company) {
+            roleEmployee = 0;
+            roleEmployer = 0;
             res.redirect("/signin");
           });
         });
+      } else if (roleEmployee == 1) {
+        db.User.create({username: username, email: email, password: password, role: 2})
+        .then(function (user) {
+            roleEmployee = 0;
+            roleEmployer = 0;
+            res.redirect("/signin");
+          });
+      }
     } else {
       res.render('v_employer_signup', {msg: "invalid", link_logo: "../page_signup_role/img/logo.png" });
     }

@@ -24,9 +24,14 @@ router.post("/",(req, res) => {
         res.render('v_signin', { msg: "failed", link_logo: "/page_index/img/logo.png" });
         console.log("2")
       } else {
-        db.curentUser.create({idUser: user.id}).then(function (user) {
-          res.redirect('/employer_dashboard');
-          console.log("3")
+        db.curentUser.create({idUser: user.id}).then(function (curentUser) {
+          if (user.role == 1) {
+            res.redirect('/employer_dashboard');
+            console.log("3")
+          } else if (user.role == 2) {
+            console.log
+            res.redirect('/');
+          }
         });
       }
     });

@@ -88,11 +88,17 @@
                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                                     <input type="password" name="pass" id="pass" placeholder="Mật khẩu"/>
                                 </div>
+                                <% if (role == 2) { %>
+                                <div class="form-group form-button">
+                                    <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                                </div>
+                                <% } %>
                         </div>
                         <div class="col signup-image">
                             <figure><img src="../page_employer_signup/images/signup-image.jpg" alt="sing up image"></figure>
                         </div>
                     </div>
+                    <% if (role == 1) { %>
                     <div style="margin-top: 100px;" class="row">
                         <div class="col signup-image">
                             <figure><img src="../page_employer_signup/images/signup-company.jpg" alt="sing up image"></figure>
@@ -100,11 +106,6 @@
                         </div>
                         <div class="col signup-form">
                             <h2 class="form-title">Thông tin công ty</h2>
-                            <% if (msg === "invalid") { %>
-                                <div class="alert alert-danger" role="alert">
-                                    Email đã được sử dụng
-                                </div>
-                            <% } %>
                                 <div class="form-group">
                                     <label for="name"><i class="zmdi zmdi-card material-icons-name"></i></label>
                                     <input type="text" name="company_name" id="company_name" placeholder="Tên công ty"/>
@@ -123,7 +124,7 @@
                             </form>
                         </div>
                     </div>
-                    
+                    <% } %>
                 </div>
             </div>
         </div>
