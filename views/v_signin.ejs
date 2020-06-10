@@ -32,8 +32,8 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="/">home</a></li>
-                                            <li><a href="">Browse Job</a></li>
+                                            <li><a href="/">Trang chủ</a></li>
+                                            <li><a href="">Tìm việc</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -56,10 +56,10 @@
                 <div class="signin-content">
                     <div class="signin-image">
                         <figure><img src="page_signin/images/signin-image.jpg" alt="sing up image"></figure>
-                        <a href="../signup_role" class="signup-image-link">Create an account</a>
+                        <a style="text-decoration:underline;" href="../signup_role" class="signup-image-link">Tạo tài khoản</a>
                     </div>
                     <div class="signin-form">
-                        <h2 class="form-title">Sign in</h2>
+                        <h2 class="form-title">Đăng nhập</h2>
                         <% if (msg === "failed") { %>
                             <div class="alert alert-danger" role="alert">
                                 Bạn có thể nhập sai tên đăng nhập hoặc mật khẩu
@@ -73,18 +73,14 @@
                         <form action="/signin" method="POST" class="register-form" id="login-form">
                             <div class="form-group">
                                 <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="email" id="your_name" placeholder="Your Email"/>
+                                <input type="text" name="email" id="your_name" placeholder="Email của bạn"/>
                             </div>
                             <div class="form-group">
                                 <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="your_pass" placeholder="Password"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                                <input type="password" name="pass" id="your_pass" placeholder="Mật khẩu"/>
                             </div>
                             <div class="form-group form-button">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                <input type="submit" name="signin" id="signin" class="form-submit" value="Đăng nhập"/>
                             </div>
                         </form>
                     </div>

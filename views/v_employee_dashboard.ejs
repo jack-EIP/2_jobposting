@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Employer Dashboard</title>
+  <title>Employee Dashboard</title>
 
   <!-- Custom fonts for this template-->
   <link href="../page_employer_dashboard/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -43,46 +43,44 @@
   <%- include('headerdb'); -%>
   </div>
 
-  <div class="container-fluid action-content">
-    <a href="/employer_dashboard/jobposting" class="btn btn-danger btn-icon-split">
-      <span class="icon text-white-50">
-        <i class="fas fa-plus"></i>
-      </span>
-      <span class="text">Đăng tuyển dụng</span>
-    </a>
+
+  <div style="margin-top: 50px;" class="container">
+    <% if (applicant.length == 0) { %>
+        <div align="center" class="alert alert-danger" role="alert">
+            Không tìm thấy công ty
+        </div>
+    <% } else { %>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Job Name</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% for(var i=0; i < applicant.length; i++) {%>
+          <tr>
+            <th scope="row"><%= i+1 %> </th>
+            <td>
+                <a style="text-decoration: underline; text-decoration-color: blue;" href="/job_details/<%= applicant[i].id %>"><%= applicant[i].Chucdanh %></a>
+            </td>
+            <td>
+                <%= applicant[i].company.Ten %>
+            </td>
+            <td>
+                <form method="post" action="/employee_dashboard/remove/<%= applicant[i].id%>">
+                    <button class="btn btn-danger" type="submit">Remove</button>
+                </form>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } %>
   </div>
-
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm border rounded status-content">
-        <div href="#" style="cursor: pointer;" class="container-fluid">
-          <div class="float-left">
-            <i class="fa fa-briefcase fa-3x text-gray-900"></i>
-          </div>
-          <div class="float-right">
-            <div align="right" class="text-xs font-weight-bold text-primary text-uppercase mb-1">Việc làm đang hiển thị</div>
-            <div align="right" class="h2 mb-0 font-weight-bold text-gray-800"><%= job.length %> </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm border rounded status-content">
-        <div class="container-fluid">
-          <div class="float-left">
-            <i class="fa fa-user fa-3x text-gray-900"></i>
-          </div>
-          <div class="float-right">
-            <div align="right" class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ứng viên đang ứng tuyển</div>
-            <div align="right" class="h2 mb-0 font-weight-bold text-gray-800">
-              <% for(var i=0; i < job.length; i++) {%>
-                <% numberOfCandidate += job[i].userRegistration.length; %>   
-              <% } %>
-              <%= numberOfCandidate %>  
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
 
 

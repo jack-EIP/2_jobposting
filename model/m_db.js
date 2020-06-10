@@ -77,24 +77,23 @@ var Job = sequelize.define('jobs', {
 var curentUser = sequelize.define(`currentUser`,{
     idUser :{
         type:Sequelize.INTEGER
+    },
+    role :{
+        type:Sequelize.INTEGER
     }
 });
 
-var Applicant = sequelize.define(`applicant`,{
-    userId: {
-        type: Sequelize.INTEGER
-    },
-    jobId: {
-        type: Sequelize.INTEGER
-    }
+var Applicant = sequelize.define(`applicants`,{
+},{
+    timestamps: false
 });
 
 Company.belongsTo(User);
-Company.hasMany(Job);
-//Job.belongsToMany(User, {through: 'applicant', timestamps: false});
-//User.belongsToMany(Job, {through: 'applicant', timestamps: false});
+// Company.hasMany(Job);
+Job.belongsTo(Company);
+Job.belongsToMany(User, { as: 'userRegistration', through: Applicant, timestamps: false});
+User.belongsToMany(Job, {as: 'jobRegistration',through: Applicant, timestamps: false});
 // create all the defined tables in the specified database.
-
 sequelize.sync()
     .catch(error => console.log('This error occured', error));
 

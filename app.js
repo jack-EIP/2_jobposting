@@ -10,6 +10,7 @@ var index_Router = require('./routes/index');
 var signin_Router = require('./routes/signin');
 var signup_Router = require('./routes/signup');
 var employer_dashboar_Router = require('./routes/employer_dashboard');
+var employee_dashboar_Router = require('./routes/employee_dashboard');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/', index_Router);
 app.use('/signin', signin_Router);
 app.use('/signup_role', signup_Router);
 app.use('/employer_dashboard', employer_dashboar_Router);
+app.use('/employee_dashboard', employee_dashboar_Router);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

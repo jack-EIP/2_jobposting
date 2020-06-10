@@ -19,6 +19,10 @@
                       <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                     </a>
                     <div class="dropdown dropdown-menu" aria-labelledby="userDropdown">
+                      <a class="dropdown-item" href="/">
+                        <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Home
+                      </a>
                       <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
@@ -44,15 +48,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Bạn có chắc chắn muốn đăng xuất ?</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a method="post" class="btn btn-primary" href="/signout">Logout</a>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Không</button>
+          <a method="post" class="btn btn-primary" href="/signout">Có</a>
         </div>
       </div>
 

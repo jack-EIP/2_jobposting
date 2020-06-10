@@ -17,24 +17,20 @@ router.get('/', function(req, res, next) {
     } else {
       currentUserId =  currentUserinDB[0].idUser;
       db.Company.findOne({where: {userId: currentUserinDB[0].idUser}}).then(function (company) {
-        db.Job.findAll({where: {companyId: company.id}}).then (function(job) {
-          jobs = job;
-          // for (var i = 0; i < job.length; i++)
-          // {
-          //   db.Applicant.findAll({where: {jobId: job[i].id}}).then (function (applicant) {
-          //     numberOfCandidate += applicant.length;
-          //     console.log("0000000000000000000000000000",numberOfCandidate);
-          //   })
-          //   console.log("11111111111111111111111111111",numberOfCandidate);
-          // }
-          job.forEach(element => {
-            db.Applicant.findAll({where: {jobId: element.id}}).then (function (applicant) {
-              numberOfCandidate += applicant.length;
-              console.log("0000000000000000000000000000",numberOfCandidate);
-            })
-          });
-          console.log("22222222222222222222222222222",numberOfCandidate);
-          res.render('v_employer_dashboard',{link_logo: "/page_index/img/logo.png",job: job, numberOfCandidate: numberOfCandidate});
+        db.Job.findAll({
+          include: [
+            {
+              model: db.User,
+              as: 'userRegistration'
+            }
+          ]
+        },{
+          where: {
+            companyId: company.id
+          }
+        }).then (function(job) {
+          console.log("ABC", job[0].userRegistration.length);
+          res.render('v_employer_dashboard',{link_logo: "/page_index/img/logo.png",job: job, numberOfCandidate: 0});
         });
       });
       console.log("3333333333333333333333333333333333",numberOfCandidate);

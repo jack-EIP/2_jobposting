@@ -4,6 +4,8 @@ var db = require("../model/m_db.js");
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+
+var totalJob = 0;
 var totalPage = 0;
 var jobPerPage = 5;
 
@@ -16,38 +18,28 @@ var currentAppplicantId = 0;
 
 
 db.Job.findAll().then(function (job) {
+  totalJob = job.length;
   totalPage = job.length / jobPerPage;
- });
+});
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var currentUser = 1;
-  db.curentUser.findAll().then(function (currentUserinDB) {
-    console.log("currentUserinDB_get1", currentUserinDB.length); 
-    if (currentUserinDB.length === 0) {  
-      currentUser = 0 ;
-    }
+  db.curentUser.findOne().then(function (currentUserinDB) {
+    db.Job.findAll({ offset: 0, limit: 5 }).then(function (job) {
+      res.render('v_index', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
+    });
   });
-
-  db.Job.findAll({ offset: 0, limit: 5 }).then(function (job) {
-    res.render('v_index', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
-   });
 });
 
 router.get('/joblist/page/:page', function(req, res, next) {
   var offset = (req.params.page * jobPerPage) - jobPerPage;
   var currentUser = 1;
 
-  db.curentUser.findAll().then(function (currentUserinDB) {
-    console.log("currentUserinDB_get2", currentUserinDB.length); 
-    if (currentUserinDB.length === 0) {  
-      currentUser = 0 ;
-    }
-  });
-
-  db.Job.findAll({ offset: offset, limit: jobPerPage}).then(function (job) {
-    res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: "../../page_index/img/logo.png", totalPage: totalPage });
+  db.curentUser.findOne().then(function (currentUserinDB) {
+    db.Job.findAll({ offset: offset, limit: jobPerPage}).then(function (job) {
+      res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: "../../page_index/img/logo.png", totalPage: totalPage, totalJob: totalJob });
+    });
   });
 });
 
@@ -64,62 +56,46 @@ router.get('/signout', function(req, res, next) {
 router.get('/job_details/:id', function(req, res, next) {
   var currentUser = 1;
   currentJobSelectedId = req.params.id;
-  db.curentUser.findAll().then(function (currentUserinDB) {
-    console.log("currentUserinDB_get2", currentUserinDB.length); 
-    if (currentUserinDB.length === 0) {  
-      currentUser = 0 ;
-    }
-  });
-
-  db.Job.findOne({
-    where: {
-      id: req.params.id
-    }
-  }).then(function (Job_detail) { 
-    res.render('v_job_details',  { Job_detail: Job_detail, link_logo: link_logo, currentUser: currentUser});
+  db.curentUser.findOne().then(function (currentUserinDB) {
+    db.Job.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (Job_detail) { 
+      res.render('v_job_details',  { Job_detail: Job_detail, link_logo: link_logo, currentUser: currentUserinDB});
+    });
   });
 });
 
 router.get('/joblist', function(req, res, next) {
   var currentUser = 1;
-  db.curentUser.findAll().then(function (currentUserinDB) {
-    console.log("currentUserinDB", currentUserinDB.length); 
-    if (currentUserinDB.length === 0) {  
-      currentUser = 0 ;
-    }
-  });  
-  db.Job.findAll({ offset: 0, limit: 5}).then(function (job) {
-    res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
-   });
+  db.curentUser.findOne().then(function (currentUserinDB) {
+    db.Job.findAll({ offset: 0, limit: 5}).then(function (job) {
+      console.log("AAAAAAAAAAAAAAAAAAA", totalPage);
+      res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: totalJob});
+    });
+  }); 
 });
 
 router.post('/joblist', function(req, res, next) {
-  var currentUser = 1;
-  db.curentUser.findAll().then(function (currentUserinDB) {
-    console.log("currentUserinDB", currentUserinDB[0].idUser); 
-    if (currentUserinDB.length === 0) {  
-      currentUser = 0 ;
+  var currentUser = 1; 
+  db.curentUser.findOne().then(function (currentUserinDB) {
+    console.log("currentUserinDB", currentUserinDB.idUser); 
+    if (!currentUserinDB) {  
+      res.redirect('/signin');
     } else
     {
-      db.Applicant.create({jobId: currentJobSelectedId, userId: currentUserinDB[0].idUser})
-      .then(function (Applicant) {
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAA",Applicant);
-      });
+      db.Applicant.create({jobId: currentJobSelectedId, userId: currentUserinDB.idUser})
+      .then(function (Applicant) {});
     }
-  });  
-  db.Job.findAll({ offset: 0, limit: 5}).then(function (job) {
-    res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
+    db.Job.findAll({ offset: 0, limit: 5}).then(function (job) {
+      res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job});
    });
+  });  
 });
 
 router.post('/joblist/search', function(req, res, next) {
-  var currentUser = 1;
-  db.curentUser.findAll().then(function (currentUserinDB) {
-    console.log("currentUserinDB_post", currentUserinDB.length); 
-    if (currentUserinDB.length === 0) {  
-      currentUser = 0 ;
-    }
-  });
+  db.curentUser.findOne().then(function (currentUserinDB) {
   var Noilamviec = req.body.Noilamviec;
   var Chucdanh = req.body.Chucdanh;
   var Nganhnghe = req.body.Nganhnghe;
@@ -177,7 +153,7 @@ router.post('/joblist/search', function(req, res, next) {
         console.log("Chuc danh", Chucdanh);
         console.log("Nganh nghe", Nganhnghe);
         console.log("Noi lam viec", Noilamviec);
-        res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
+        res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job.length});
       })
       break;
     }
@@ -193,7 +169,7 @@ router.post('/joblist/search', function(req, res, next) {
         console.log("Chuc danh", Chucdanh);
         console.log("Nganh nghe", Nganhnghe);
         console.log("Noi lam viec", Noilamviec);
-        res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
+        res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job.length });
       })
       break;
     }
@@ -209,7 +185,7 @@ router.post('/joblist/search', function(req, res, next) {
         console.log("Chuc danh", Chucdanh);
         console.log("Nganh nghe", Nganhnghe);
         console.log("Noi lam viec", Noilamviec);
-        res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
+        res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job.length });
       })
       break;
     }
@@ -228,7 +204,7 @@ router.post('/joblist/search', function(req, res, next) {
         console.log("Chuc danh", Chucdanh);
         console.log("Nganh nghe", Nganhnghe);
         console.log("Noi lam viec", Noilamviec);
-        res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
+        res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job.length });
       })
       break;
     }
@@ -247,7 +223,7 @@ router.post('/joblist/search', function(req, res, next) {
         console.log("Chuc danh", Chucdanh);
         console.log("Nganh nghe", Nganhnghe);
         console.log("Noi lam viec", Noilamviec);
-        res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
+        res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job.length });
       })
       break;
     }
@@ -264,7 +240,7 @@ router.post('/joblist/search', function(req, res, next) {
         console.log("Chuc danh", Chucdanh);
         console.log("Nganh nghe", Nganhnghe);
         console.log("Noi lam viec", Noilamviec);
-        res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
+        res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job.length });
       })
       break;
     }
@@ -284,7 +260,7 @@ router.post('/joblist/search', function(req, res, next) {
         console.log("Chuc danh", Chucdanh);
         console.log("Nganh nghe", Nganhnghe);
         console.log("Noi lam viec", Noilamviec);
-        res.render('v_job_list', {currentUser: currentUser, test: 0, job: job, link_logo: link_logo, totalPage: totalPage });
+        res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job.length });
       })
       break;
     }
@@ -295,7 +271,7 @@ router.post('/joblist/search', function(req, res, next) {
       console.log("Nganh nghe", Nganhnghe);
       console.log("Noi lam viec", Noilamviec);
       job = [];
-      res.render('v_job_list', {currentUser: currentUser, test: 1, job: job, link_logo: link_logo, totalPage: totalPage });
+      res.render('v_job_list', {currentUser: currentUserinDB, test: 1, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job.length });
       break;
   }
   
@@ -317,5 +293,6 @@ router.post('/joblist/search', function(req, res, next) {
   // });
 
   
+  });
 });
 module.exports = router;

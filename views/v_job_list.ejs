@@ -26,7 +26,7 @@
 
     <link rel="stylesheet" href="../../page_joblist/css/style.css">
     <link rel="stylesheet" href="../../page_joblist/css/custom_style.css">
-	<link rel="stylesheet" type="text/css" href="../page_joblist/css/main.css">
+	<link rel="stylesheet" type="text/css" href="../../page_joblist/css/main.css">
     
     <link href="../../page_joblist/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../../page_joblist/css/style.css" rel="stylesheet">
@@ -42,7 +42,7 @@
         <![endif]-->
 
     <!-- header-start -->
-    <header>
+    <!-- <header>
          <div class="header-area ">
             <div id="sticky-header" class="main-header-area">
                 <div class="container-fluid ">
@@ -59,8 +59,8 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="/">home</a></li>
-                                            <li><a href="">Browse Job</a></li>
+                                            <li><a href="/">Trang chủ</a></li>
+                                            <li><a href="">Tìm việc</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -69,10 +69,10 @@
                                 <div class="Appointment">
                                     <% if (currentUser === 0) { %>
                                         <div class="phone_num d-none d-xl-block">
-                                            <a class="boxed-btn3" href="/signup_role">Sign up</a>
+                                            <a class="boxed-btn3" href="/signup_role">Đăng ký</a>
                                         </div>
                                         <div class="phone_num d-none d-lg-block">
-                                            <a class="boxed-btn3" href="/signin">Sign in</a>
+                                            <a class="boxed-btn3" href="/signin">Đăng nhập</a>
                                         </div>
                                     <%} else {  %>
                                         <div style="margin-right: 10px" class="d-none d-xl-block">
@@ -80,7 +80,7 @@
                                         </div>
                                         
                                         <div class=" d-none d-lg-block">
-                                            <a class="boxed-btn3" href="/signout">Log out</a>
+                                            <a class="boxed-btn3" href="/signout">Đăng xuất</a>
                                         </div>
                                     <% } %> 
                                 </div>
@@ -94,7 +94,9 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header> -->
+
+    <%- include('header'); -%>
     <!-- header-end -->
 
     <!-- slider_area_start -->
@@ -144,7 +146,7 @@
                         </div>
                     </div>
                     <div align="center" class="job_btn">
-                        <button type="submit" class="boxed-btn3">Find Job</button>
+                        <button type="submit" class="boxed-btn3">Tìm việc</button>
                     </div>
                 </form>
 
@@ -162,7 +164,7 @@
     <div class="container-fluid action-content">
         <div style="padding: 10px 0px 10px 0px;" class="container">
             <a href="/employer_dashboard/jobposting" class="btn btn-danger btn-icon-split">
-            <span class="text"><%= job.length %> việc đang đăng</span>
+            <span class="text"><%= totalJob %> việc đang đăng</span>
             </a>
         </div>
     </div> 
@@ -201,7 +203,7 @@
                                         </div>
                                         </div>
                                         <div align="right" class="col-4">
-                                            <a href="/job_details/<%= job[i].id%>" class="boxed-btn3">Apply Now</a>
+                                            <a href="/job_details/<%= job[i].id%>" class="boxed-btn3">Ứng tuyển</a>
                                         </div>
                                     </div>
                                 </div>
