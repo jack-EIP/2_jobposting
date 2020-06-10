@@ -43,49 +43,53 @@
   <%- include('headerdb'); -%>
   </div>
 
-  <div class="container-fluid action-content">
-    <a href="/employer_dashboard/jobposting" class="btn btn-danger btn-icon-split">
-      <span class="icon text-white-50">
-        <i class="fas fa-plus"></i>
-      </span>
-      <span class="text">Đăng tuyển dụng</span>
-    </a>
-  </div>
+    <div class="container-fluid action-content">
+        <a href="/employer_dashboard/jobposting" class="btn btn-danger btn-icon-split">
+          <span class="icon text-white-50">
+            <i class="fas fa-plus"></i>
+          </span>
+          <span class="text">Đăng tuyển dụng</span>
+        </a>
+        <a style="margin-left:20px" href="/employer_dashboard/" class="btn btn-danger btn-icon-split">
+            <span class="icon text-white-50">
+              <i class="fas fa-home"></i>
+            </span>
+            <span class="text">Trang quản trị</span>
+        </a>
+    </div>
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm border rounded status-content">
-        <div href="#" style="cursor: pointer;" class="container-fluid">
-          <div class="float-left">
-            <i class="fa fa-briefcase fa-3x text-gray-900"></i>
-          </div>
-          <div class="float-right">
-            <div align="right" class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-              <a href="/employer_dashboard/posted_job_list">Việc làm đang hiển thị</a>
+  <div style="margin-top: 50px;" class="container">
+        <% if (job.length == 0) { %>
+            <div align="center" class="alert alert-danger" role="alert">
+                Không có viêc làm đang đăng tuyển
             </div>
-            <div align="right" class="h2 mb-0 font-weight-bold text-gray-800"><%= job.length %> </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm border rounded status-content">
-        <div class="container-fluid">
-          <div class="float-left">
-            <i class="fa fa-user fa-3x text-gray-900"></i>
-          </div>
-          <div class="float-right">
-            <div align="right" class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-              <a href="/employer_dashboard/candidate_list">Ứng viên đang ứng tuyển</a>
-            </div>
-            <div align="right" class="h2 mb-0 font-weight-bold text-gray-800">
-              <% for(var i=0; i < job.length; i++) {%>
-                <% numberOfCandidate += job[i].userRegistration.length; %>   
+        <% } else { %>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Job Name</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i < job.length; i++) { %>
+                <tr>
+                    <th scope="row"><%= i+1 %> </th>
+                    <td>
+                        <%= job[i].Chucdanh %>
+                    </td>
+                    <td>
+                        <form method="post" action="/employer_dashboard/job_posted_list/remove/<%= job[i].id%>">
+                            <button class="btn btn-danger" type="submit">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
               <% } %>
-              <%= numberOfCandidate %>  
-            </div>
-          </div>
-        </div>
-      </div>
+            </tbody>
+          </table>
+          <% } %>
     </div>
 
 

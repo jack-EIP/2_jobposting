@@ -17,24 +17,100 @@ router.get('/', function(req, res, next) {
     } else {
       currentUserId =  currentUserinDB[0].idUser;
       db.Company.findOne({where: {userId: currentUserinDB[0].idUser}}).then(function (company) {
-        db.Job.findAll({
-          include: [
+        db.Job.findAll(
+          {
+            where: {
+              companyId: company.id
+          },
+          include: 
             {
               model: db.User,
               as: 'userRegistration'
             }
-          ]
-        },{
-          where: {
-            companyId: company.id
-          }
         }).then (function(job) {
-          console.log("ABC", job[0].userRegistration.length);
           res.render('v_employer_dashboard',{link_logo: "/page_index/img/logo.png",job: job, numberOfCandidate: 0});
         });
       });
       console.log("3333333333333333333333333333333333",numberOfCandidate);
     }
+  });
+});
+
+router.get('/candidate_list', function(req, res, next) {
+  var jobs = [];
+  var currentUser = 1;
+  numberOfCandidate = 0;
+  db.curentUser.findAll().then(function (currentUserinDB) { 
+    if (currentUserinDB.length === 0) {  
+      currentUser = 0 ;
+    } else {
+      currentUserId =  currentUserinDB[0].idUser;
+      db.Company.findOne({where: {userId: currentUserinDB[0].idUser}}).then(function (company) {
+        db.Job.findAll(
+          {
+            where: {
+              companyId: company.id
+          },
+          include: 
+            {
+              model: db.User,
+              as: 'userRegistration'
+            }
+        }).then (function(job) {
+          console.log(job);
+          res.render('v_candidate_list',{link_logo: "/page_index/img/logo.png",job: job, numberOfCandidate: 0});
+        });
+      });
+      console.log("3333333333333333333333333333333333",numberOfCandidate);
+    }
+  });
+});
+
+router.get('/posted_job_list', function(req, res, next) {
+  var jobs = [];
+  var currentUser = 1;
+  numberOfCandidate = 0;
+  db.curentUser.findAll().then(function (currentUserinDB) { 
+    if (currentUserinDB.length === 0) {  
+      currentUser = 0 ;
+    } else {
+      currentUserId =  currentUserinDB[0].idUser;
+      db.Company.findOne({where: {userId: currentUserinDB[0].idUser}}).then(function (company) {
+        db.Job.findAll(
+          {
+            where: {
+              companyId: company.id
+          },
+          include: 
+            {
+              model: db.User,
+              as: 'userRegistration'
+            }
+        }).then (function(job) {
+          console.log("RETURNNNNNNNNNNNNNNNNNNN",job);
+          res.render('v_posted_job_list',{link_logo: "/page_index/img/logo.png",job: job, numberOfCandidate: 0});
+        });
+      });
+    }
+  });
+});
+
+router.post('/candidate_list/remove/:id1/:id2', function(req, res, next) {
+  var currentUserRemoveId = req.params.id1;
+  var currentJobRemoveId = req.params.id2;
+  console.log("???????????????????",currentUserRemoveId,currentJobRemoveId);
+  db.Applicant.destroy({where: {jobId: currentJobRemoveId, userId: currentUserRemoveId}}).then(function (param){
+    console.log(param);
+    res.redirect('/employer_dashboard/candidate_list');
+  });
+});
+
+router.post('/job_posted_list/remove/:id', function(req, res, next) {
+  var currentJobRemoveId = req.params.id;
+  console.log("???????????????????",currentJobRemoveId);
+  db.Job.destroy({where: {id: currentJobRemoveId}}).then(function (param){
+    console.log(param);
+    res.redirect('/employer_dashboard/posted_job_list');
   });
 });
 
