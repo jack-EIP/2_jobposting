@@ -85,12 +85,21 @@ router.post('/joblist', function(req, res, next) {
       res.redirect('/signin');
     } else
     {
-      db.Applicant.create({jobId: currentJobSelectedId, userId: currentUserinDB.idUser})
-      .then(function (Applicant) {});
-    }
-    db.Job.findAll({ offset: 0, limit: 5}).then(function (job) {
-      res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: job});
-   });
+      db.Applicant.findOne({jobId: currentJobSelectedId, userId: currentUserinDB.idUser}).then(function (Applicant) {
+        if (Applicant) {
+          db.Job.findAll({ offset: 0, limit: 5}).then(function (job) {
+            console.log("Khong co ra", job);
+            res.render('v_job_list', {currentUser: currentUserinDB, test: 2, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: totalJob});
+            });
+        } else {
+          db.Applicant.create({jobId: currentJobSelectedId, userId: currentUserinDB.idUser})
+          .then(function (Applicant) {});
+          db.Job.findAll({ offset: 0, limit: 5}).then(function (job) {
+          res.render('v_job_list', {currentUser: currentUserinDB, test: 0, job: job, link_logo: link_logo, totalPage: totalPage, totalJob: totalJob});
+          });
+        }
+      });
+    }    
   });  
 });
 

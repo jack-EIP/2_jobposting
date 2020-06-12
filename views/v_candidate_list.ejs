@@ -60,7 +60,17 @@
 
 
   <div style="margin-top: 50px;" class="container">
-        <% if (!job.userRegistration) { %>
+    <% if (job.length == 0) { %>
+      <div align="center" class="alert alert-danger" role="alert">
+        Không có ứng viên
+      </div>
+    <% } else { %>  
+    <% for (var a = 0 ; a < job.length ; a++) { %>
+      <% for (var b = 0; b < job[a].userRegistration.length; b++) { %>
+        <% numberOfCandidate = numberOfCandidate + job[a].userRegistration[b].length; %>
+      <% } %>
+    <% } %>
+      <% if (numberOfCandidate == 0) { %>  
             <div align="center" class="alert alert-danger" role="alert">
                 Không có ứng viên
             </div>
@@ -96,6 +106,7 @@
             </tbody>
           </table>
           <% } %>
+        <% } %>
       </div>
 
 

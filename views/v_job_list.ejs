@@ -169,6 +169,11 @@
         </div>
     </div> 
 
+    <% if (test == 2) { %>  
+        <div align="center" class="alert alert-danger" role="alert">
+           Bạn đã ứng tuyển cho công việc này rồi
+        </div>
+    <% } %>
     <!-- job_listing_area_start  -->
     <div style="padding-top: 20px;" class="job_listing_area">
         <div class="container">
@@ -181,7 +186,6 @@
                 </div>
                 <% } else {  %> 
                     <div class="">
-                        <% if (test === 0) { %>
                             <% for(var i=0; i < job.length; i++) {%>
                                 <div style="margin-bottom: 50px; padding:20px; background-color: white;" class="rounded container">
                                     <div class="container-fluid row">
@@ -208,7 +212,6 @@
                                     </div>
                                 </div>
                             <% } %>
-                        <% } %>
                 </div>
             </div>
 
