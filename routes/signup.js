@@ -28,34 +28,48 @@ router.post("/signup",(req, res) => {
       company_name = req.body.company_name;
       company_address = req.body.company_address;
       company_info = req.body.company_info;
-  db.User.findAll({
-    where: {email: req.body.email}
-  }).then(function(user) {
-    console.log(user)
-    if (user.length === 0)
-    {
-      if (roleEmployer == 1) {
-      db.User.create({username: username, email: email, password: password, role: 1})
-      .then(function (user) {
-        db.Company.create({Ten: company_name, Diachi: company_address, Thongtin: company_info, userId: user.id})
-        .then(function (company) {
-            roleEmployee = 0;
-            roleEmployer = 0;
-            res.redirect("/signin");
-          });
-        });
-      } else if (roleEmployee == 1) {
-        db.User.create({username: username, email: email, password: password, role: 2})
-        .then(function (user) {
-            roleEmployee = 0;
-            roleEmployer = 0;
-            res.redirect("/signin");
-          });
-      }
-    } else {
-      res.render('v_employer_signup', {msg: "invalid", link_logo: "../page_signup_role/img/logo.png" });
+  if (!email || !password || !username || !company_name || !company_address || !company_info)
+  {
+    console.log("?????????????????????????",roleEmployee);
+    if (roleEmployer == 1) {
+      res.render('v_employer_signup', {msg: "invalid_1", link_logo: "../page_signup_role/img/logo.png", role: 1 });
+    } else if (roleEmployee == 1) {
+      res.render('v_employer_signup', {msg: "invalid_1", link_logo: "../page_signup_role/img/logo.png", role: 2 });
     }
-  });
+  } else {
+    db.User.findAll({
+      where: {email: req.body.email}
+    }).then(function(user) {
+      console.log(user)
+      if (user.length === 0)
+      {
+        if (roleEmployer == 1) {
+        db.User.create({username: username, email: email, password: password, role: 1})
+        .then(function (user) {
+          db.Company.create({Ten: company_name, Diachi: company_address, Thongtin: company_info, userId: user.id})
+          .then(function (company) {
+              roleEmployee = 0;
+              roleEmployer = 0;
+              res.redirect("/signin");
+            });
+          });
+        } else if (roleEmployee == 1) {
+          db.User.create({username: username, email: email, password: password, role: 2})
+          .then(function (user) {
+              roleEmployee = 0;
+              roleEmployer = 0;
+              res.redirect("/signin");
+            });
+        }
+      } else {
+        if (roleEmployer == 1) {
+          res.render('v_employer_signup', {msg: "invalid_2", link_logo: "../page_signup_role/img/logo.png", role: 1 });
+        } else if (roleEmployee == 1) {
+          res.render('v_employer_signup', {msg: "invalid_2", link_logo: "../page_signup_role/img/logo.png", role: 2 });
+        }
+      }
+    });
+  }
 });
 
 

@@ -70,7 +70,12 @@
                     <div class="row">
                         <div class="col signup-form">
                             <h2 class="form-title">Thông tin của bạn</h2>
-                            <% if (msg === "invalid") { %>
+                            <% if (msg === "invalid_1") { %>
+                                <div class="alert alert-danger" role="alert">
+                                    Bạn phải nhập đầy đủ thông tin
+                                </div>
+                            <% } %>
+                            <% if (msg === "invalid_2") { %>
                                 <div class="alert alert-danger" role="alert">
                                     Email đã được sử dụng
                                 </div>

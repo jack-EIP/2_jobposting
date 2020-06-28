@@ -85,7 +85,7 @@ router.post('/joblist', function(req, res, next) {
       res.redirect('/signin');
     } else
     {
-      db.Applicant.findOne({jobId: currentJobSelectedId, userId: currentUserinDB.idUser}).then(function (Applicant) {
+      db.Applicant.findOne({where: {jobId: currentJobSelectedId, userId: currentUserinDB.idUser}}).then(function (Applicant) {
         if (Applicant) {
           db.Job.findAll({ offset: 0, limit: 5}).then(function (job) {
             console.log("Khong co ra", job);
